@@ -1,15 +1,94 @@
 ---
+import "../styles/global.css";
 
+import Footer from "../components/footer.astro";
+import Header from "../components/header.astro";
+
+const pageTitle = "About Me";
+
+const identity = {
+  firstName: "Ryan",
+  country: "United States",
+  oppupation: "Nerd of Nerds",
+  hobbies: ["programming", "aviation", "football"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Dumb Stuff"];
+
+const happy = true;
+const finished = false;
+const goal = 1;
+
+const skillColor = "navy";
+const fontWeight = "bold";
+const textCase = "uppercase";
 ---
 
-<body>
-  <a href="/">Home</a>
-  <a href="/about/">About</a>
-  <a href="/blog/">Blog</a>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
 
-  <h2>About Me</h2>
+    <h1>About Me</h1>
 
-  <h2>And my new site</h2>
+    <h2>And my new site</h2>
 
-  <p>This is way more fun to use HTML, I feel like a kid again ;)</p>
-</body>
+    <p>This is way more fun to use HTML, I feel like a kid again ;)</p>
+
+    <p>Here are a few facts about me</p>
+
+    <ul>
+      <li>My name is {identity.firstName}</li>
+      <li>I live in {identity.country} and I work as a {identity.country}.</li>
+
+      {
+        identity.hobbies.length >= 2 && (
+          <li>
+            Two of my hobbies are {identity.hobbies[0]} and{" "}
+            {identity.hobbies[1]}
+          </li>
+        )
+      }
+    </ul>
+    <p>My skills are</p>
+    <ul>
+      {skills.map((skill) => <li class="skill">{skill}</li>)}
+    </ul>
+
+    {happy && <p>I am happy to be learning astro!</p>}
+
+    {finished && <p>I am finished with this tutorial</p>}
+
+    {
+      goal === 1 ? (
+        <p>My goal is to finish in one day</p>
+      ) : (
+        <p>My goal is to finish in more than one days.</p>
+      )
+    }
+
+    <Footer />
+    <script>
+      import "../scripts/menu.js";
+    </script>
+  </body>
+</html>
+
+<style define:vars={{ skillColor, fontWeight, textCase }}>
+  h1 {
+    color: purple;
+    font-size: 4rem;
+  }
+
+  .skill {
+    color: var(--skillColor);
+    font-weight: var(--fontWeight);
+    text-transform: var(--textCase);
+  }
+</style>
