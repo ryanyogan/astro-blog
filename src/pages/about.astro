@@ -1,8 +1,7 @@
 ---
 import "../styles/global.css";
 
-import Footer from "../components/footer.astro";
-import Header from "../components/header.astro";
+import BaseLayout from "../layouts/base-layout.astro";
 
 const pageTitle = "About Me";
 
@@ -24,61 +23,42 @@ const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-  </head>
-  <body>
-    <Header />
+<BaseLayout pageTitle={pageTitle}>
+  <h2>And my new site</h2>
 
-    <h1>About Me</h1>
+  <p>This is way more fun to use HTML, I feel like a kid again ;)</p>
 
-    <h2>And my new site</h2>
+  <p>Here are a few facts about me</p>
 
-    <p>This is way more fun to use HTML, I feel like a kid again ;)</p>
-
-    <p>Here are a few facts about me</p>
-
-    <ul>
-      <li>My name is {identity.firstName}</li>
-      <li>I live in {identity.country} and I work as a {identity.country}.</li>
-
-      {
-        identity.hobbies.length >= 2 && (
-          <li>
-            Two of my hobbies are {identity.hobbies[0]} and{" "}
-            {identity.hobbies[1]}
-          </li>
-        )
-      }
-    </ul>
-    <p>My skills are</p>
-    <ul>
-      {skills.map((skill) => <li class="skill">{skill}</li>)}
-    </ul>
-
-    {happy && <p>I am happy to be learning astro!</p>}
-
-    {finished && <p>I am finished with this tutorial</p>}
+  <ul>
+    <li>My name is {identity.firstName}</li>
+    <li>I live in {identity.country} and I work as a {identity.country}.</li>
 
     {
-      goal === 1 ? (
-        <p>My goal is to finish in one day</p>
-      ) : (
-        <p>My goal is to finish in more than one days.</p>
+      identity.hobbies.length >= 2 && (
+        <li>
+          Two of my hobbies are {identity.hobbies[0]} and {identity.hobbies[1]}
+        </li>
       )
     }
+  </ul>
+  <p>My skills are</p>
+  <ul>
+    {skills.map((skill) => <li class="skill">{skill}</li>)}
+  </ul>
 
-    <Footer />
-    <script>
-      import "../scripts/menu.js";
-    </script>
-  </body>
-</html>
+  {happy && <p>I am happy to be learning astro!</p>}
+
+  {finished && <p>I am finished with this tutorial</p>}
+
+  {
+    goal === 1 ? (
+      <p>My goal is to finish in one day</p>
+    ) : (
+      <p>My goal is to finish in more than one days.</p>
+    )
+  }
+</BaseLayout>
 
 <style define:vars={{ skillColor, fontWeight, textCase }}>
   h1 {
